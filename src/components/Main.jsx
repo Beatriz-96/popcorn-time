@@ -27,16 +27,26 @@ function Main(){
 
     }
 
+    let message;
+    if(moviesToDisplay.length > 0) {
+        message = <h1>Number of movies: {moviesToDisplay.length} </h1> 
+    } else {
+        message = <h1>Sorry, no movies to display</h1>
+    }
+
     return (
         <div className="Main">
-            <h1>Number of movies: {moviesToDisplay.length} </h1>
+            {message}
 
             {moviesToDisplay.map((movieObj) => {
                 return (
                     <section key={movieObj.id} className="card" >
                         <h2>{movieObj.title}</h2>
+                        
+                        {movieObj.imgURL ? <img src={movieObj.imgURL}/> : <p>NO IMAGE</p>}
+
                         <h3>Rating: {movieObj.rating}</h3>
-                        <img src={movieObj.imgURL} alt="" />
+                        {movieObj.rating > 8 && <p>RECOMMENDED</p>}
                         <br/>
                         <button onClick={() => {deleteMovie(movieObj.id)}}>Delete</button>
                     </section>
